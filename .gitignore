@@ -1,0 +1,8 @@
+/vendor
+/node_modules
+Homestead.yaml
+Homestead.json
+.env
+/storage/logs/laravel.log
+/storage/uploads/grant_proposals/*.pdf
+/storage/uploads/payment_proofs/*.pdf
