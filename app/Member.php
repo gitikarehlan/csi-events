@@ -96,4 +96,6 @@ class Member extends Model implements AuthenticatableContract,
     {
         return $this->belongsTo('App\Institution', 'id', 'member_id');
     }
+
+    
 }
