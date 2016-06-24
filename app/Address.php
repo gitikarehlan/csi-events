@@ -22,7 +22,7 @@ class Address extends Model
     	return $this->hasOne('App\State', 'state_code', 'state_code');
     }
 
-	public function type()	{
+    public function type()	{
     	return $this->hasOne('App\AddressType', 'id', 'type_id');
     }
 

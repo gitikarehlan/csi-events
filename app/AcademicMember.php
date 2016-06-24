@@ -13,10 +13,10 @@ class AcademicMember extends Model
 	}
 
 	public function InstitutionType() {
-        return $this->hasOne('App\InstitutionType', 'id', 'institution_type_id');
-    }
+		return $this->hasOne('App\InstitutionType', 'id', 'institution_type_id');
+	}
 
- 	public function scopeIsStudentBranch($query){
+	public function scopeIsStudentBranch($query){
 		return $query->where('is_student_branch', 1);
 	}   
 }

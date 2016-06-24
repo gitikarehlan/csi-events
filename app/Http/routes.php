@@ -18,9 +18,9 @@ Route::group(['prefix'=> 'admin' ,'namespace'=>'Admin'], function(){
 		return View('backend.sample-list');
 
 	}]);
-    Route::get('/', ['as' => 'admin', 'uses' => 'Auth\AdminAuthController@index']);
-    
-    Route::get('login', [ 'middleware' => 'guest.admin', 'uses' => 'Auth\AdminAuthController@getLogin'] );
+	Route::get('/', ['as' => 'admin', 'uses' => 'Auth\AdminAuthController@index']);
+	
+	Route::get('login', [ 'middleware' => 'guest.admin', 'uses' => 'Auth\AdminAuthController@getLogin'] );
 	Route::post('login', [ 'as' => 'adminLogin', 'uses' => 'Auth\AdminAuthController@postLogin'] );
 	Route::get('logout', [ 'as' => 'logout', 'uses' => 'Auth\AdminAuthController@getLogout']);
 
@@ -44,35 +44,35 @@ Route::group(['prefix'=> 'admin' ,'namespace'=>'Admin'], function(){
 		// Route::get('/', [ 'as' => 'backendInstitutionHome', 'uses'=>'AdminDashboardController@index' ]);
 	});
 
-	Route::get('proofs/{filename}', function($filename){
-	    $path = storage_path() . '/uploads/payment_proofs/' . $filename;
+Route::get('proofs/{filename}', function($filename){
+	$path = storage_path() . '/uploads/payment_proofs/' . $filename;
 
-		$filetype = File::mimeType($path);
-		$imgbinary = fread(fopen($path, "r"), filesize($path));
-    	$file = 'data:image/' . $filetype . ';base64,' . base64_encode($imgbinary);
+	$filetype = File::mimeType($path);
+	$imgbinary = fread(fopen($path, "r"), filesize($path));
+	$file = 'data:image/' . $filetype . ';base64,' . base64_encode($imgbinary);
 
 	    //$file = base64_encode(file_get_contents($path));
 
-	    return view('backend.individuals.proof', compact('file'));
-	});
+	return view('backend.individuals.proof', compact('file'));
+});
 
-	Route::group(['prefix' => 'individual', 'middleware'=>'auth.admin'], function(){
-		
-		Route::get('{typeId}/verify/{id}', [ 'as' => 'backendIndividualVerifyById', 'uses'=>'IndividualController@verify' ]);
-		Route::get('{typeId}/profile/{id}', [ 'as' => 'backendIndividualById', 'uses'=>'IndividualController@profile' ]);
-		Route::get('{typeId}/profile/{id}/reject/{pid}', [ 'as' => 'backendIndividualRejectById', 'uses'=>'IndividualController@reject_payment' ]);
-		Route::post('{typeId}/profile/{id}/reject/{pid}', [ 'as' => 'backendIndividualRejectById', 'uses'=>'IndividualController@store_reject_payment' ]);
-		Route::get('{typeId}/profile/{id}/accept/{pid}', [ 'as' => 'backendIndividualAcceptById', 'uses'=>'IndividualController@accept_payment' ]);
-		Route::get('{typeId}/profile/{id}/proof/{nid}', [ 'as' => 'backendIndividualProofById', 'uses'=>'IndividualController@view_proof' ]);
-		Route::get('{typeId}', [ 'as' => 'backendIndividual', 'uses'=>'IndividualController@index' ]);
-		Route::get('/', [ 'as' => 'backendIndividualHome', 'uses'=>'AdminDashboardController@index' ]);
-	});
+Route::group(['prefix' => 'individual', 'middleware'=>'auth.admin'], function(){
+	
+	Route::get('{typeId}/verify/{id}', [ 'as' => 'backendIndividualVerifyById', 'uses'=>'IndividualController@verify' ]);
+	Route::get('{typeId}/profile/{id}', [ 'as' => 'backendIndividualById', 'uses'=>'IndividualController@profile' ]);
+	Route::get('{typeId}/profile/{id}/reject/{pid}', [ 'as' => 'backendIndividualRejectById', 'uses'=>'IndividualController@reject_payment' ]);
+	Route::post('{typeId}/profile/{id}/reject/{pid}', [ 'as' => 'backendIndividualRejectById', 'uses'=>'IndividualController@store_reject_payment' ]);
+	Route::get('{typeId}/profile/{id}/accept/{pid}', [ 'as' => 'backendIndividualAcceptById', 'uses'=>'IndividualController@accept_payment' ]);
+	Route::get('{typeId}/profile/{id}/proof/{nid}', [ 'as' => 'backendIndividualProofById', 'uses'=>'IndividualController@view_proof' ]);
+	Route::get('{typeId}', [ 'as' => 'backendIndividual', 'uses'=>'IndividualController@index' ]);
+	Route::get('/', [ 'as' => 'backendIndividualHome', 'uses'=>'AdminDashboardController@index' ]);
+});
 
 });
 
 Route::get('register/{entity}', [
-		'as'=>'register', 'uses'=>'RegisterController@create'
-]);
+	'as'=>'register', 'uses'=>'RegisterController@create'
+	]);
 Route::post('register/getresource/{resource}', 'RegisterController@getResource');
 Route::post('register/{entity}', 'RegisterController@store');
 
@@ -126,16 +126,16 @@ Route::get('/viewfile/{id?}',['middleware'=>'auth','uses'=>'ResearchGrantControl
 Route::post('/user_comments/{id?}/{v_num?}',['middleware'=>'auth','uses'=>'ResearchGrantController@comments'])->name('user_comments');	
 
 Route::group(['prefix'=> 'admin' ], function(){
-			Route::get('/admin_grants', ['middleware'=>'auth.admin','uses'=>'adminResearchGrantController@allgrants']);	
+	Route::get('/admin_grants', ['middleware'=>'auth.admin','uses'=>'adminResearchGrantController@allgrants']);	
 
-			Route::get('/admin_version1/{v?}', ['middleware'=>'auth.admin', 'as' => 'commentsAndStatus',  'uses'=>'adminResearchGrantController@commentsandstatus']);	
-			Route::post('/admin_version/{id?}', ['middleware'=>'auth.admin', 'as' => 'makechanges', 'uses'=>'adminResearchGrantController@makechanges']);	
+	Route::get('/admin_version1/{v?}', ['middleware'=>'auth.admin', 'as' => 'commentsAndStatus',  'uses'=>'adminResearchGrantController@commentsandstatus']);	
+	Route::post('/admin_version/{id?}', ['middleware'=>'auth.admin', 'as' => 'makechanges', 'uses'=>'adminResearchGrantController@makechanges']);	
 
-			Route::get('/admin_viewfile/{v?}', ['middleware'=>'auth.admin','uses'=>'adminResearchGrantController@viewfile']);	
-			Route::get('/admin_searchfile', ['middleware'=>'auth.admin','uses'=>'adminResearchGrantController@searchfile']);
-			Route::get('/admin_showversions/{id?}',['middleware'=>'auth.admin','uses'=>'adminResearchGrantController@admin_showversions']);
-			Route::get('/admin_showcomments/{id?}/{v_num?}',['middleware'=>'auth.admin','uses'=>'adminResearchGrantController@showcomments'])->name('show_comments');
-			Route::post('/admin_comments/{id?}/{v_num?}',['middleware'=>'auth.admin','uses'=>'adminResearchGrantController@comments'])->name('admin_comments');
+	Route::get('/admin_viewfile/{v?}', ['middleware'=>'auth.admin','uses'=>'adminResearchGrantController@viewfile']);	
+	Route::get('/admin_searchfile', ['middleware'=>'auth.admin','uses'=>'adminResearchGrantController@searchfile']);
+	Route::get('/admin_showversions/{id?}',['middleware'=>'auth.admin','uses'=>'adminResearchGrantController@admin_showversions']);
+	Route::get('/admin_showcomments/{id?}/{v_num?}',['middleware'=>'auth.admin','uses'=>'adminResearchGrantController@showcomments'])->name('show_comments');
+	Route::post('/admin_comments/{id?}/{v_num?}',['middleware'=>'auth.admin','uses'=>'adminResearchGrantController@comments'])->name('admin_comments');
 
 });
 
@@ -155,13 +155,13 @@ Route::group(['prefix'=> 'admin' ], function(){
 // Registration routes...
 // Route::group(['prefix' => 'admin'], function() {
 // 	// Authentication routes...
-	
+
 
 // 	// Registration routes...
 // 	//Route::get('auth/register', 'Auth\AdminAuthController@getRegister');
 // 	//Route::post('auth/register', 'Auth\AdminAuthController@postRegister');
-	
-	
+
+
 // });
 // Registration routes...
 // Route::get('/dashboard', ['middleware' => 'auth' ,'uses' => 'UserDashboardController@index']);

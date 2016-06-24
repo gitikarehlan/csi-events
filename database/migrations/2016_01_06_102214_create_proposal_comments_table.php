@@ -12,7 +12,7 @@ class CreateProposalCommentsTable extends Migration
      */
     public function up()
     {
-    Schema::create('proposal_comments', function (Blueprint $table) {
+        Schema::create('proposal_comments', function (Blueprint $table) {
             $table->engine = 'InnoDB';
 
             $table->bigIncrements('id')->unsigned();
@@ -20,17 +20,17 @@ class CreateProposalCommentsTable extends Migration
             $table->bigInteger('proposal_version_id')->unsigned();
             $table->tinyInteger('type');
             
-    
+            
             $table->timestamps();
 
             
 
-          $table->foreign('proposal_version_id')
-                    ->references('id')->on('proposal_versions')
-                    ->onDelete('CASCADE')
-                    ->onUpdate('CASCADE'); 
+            $table->foreign('proposal_version_id')
+            ->references('id')->on('proposal_versions')
+            ->onDelete('CASCADE')
+            ->onUpdate('CASCADE'); 
 
-            });
+        });
     }
 
     /**

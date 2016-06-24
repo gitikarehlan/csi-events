@@ -32,13 +32,13 @@ class CreateProposalVersionsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('proposal_id')
-                    ->references('id')->on('proposals')
-                    ->onDelete('CASCADE')
-                    ->onUpdate('CASCADE'); 
+            ->references('id')->on('proposals')
+            ->onDelete('CASCADE')
+            ->onUpdate('CASCADE'); 
 
         });
 
-    }
+}
 
     /**
      * Reverse the migrations.
