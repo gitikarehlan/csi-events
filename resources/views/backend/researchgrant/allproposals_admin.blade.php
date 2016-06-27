@@ -106,51 +106,43 @@
 		<!--<div class="col-md-12">-->
 		
 		
-		{!! Form::open(['url'=>'/admin/admin_searchfile','method' => 'get', 'class' => 'form-inline','files'=>true]) !!}
+		{!! Form::open(['route'=>'adminResearchGrantView','method' => 'get', 'class' => 'form-inline','files'=>true]) !!}
 		
 
 		<div class="form-group">
 			<div class="checkbox">
 				<!--<p>Search:</p>-->
-				
+
 				Status:
 				<label>
-					<input type="checkbox" name="new" id = "status" value="0"> New/Pending
-				</label>
-				
-				<label>
-					<input type="checkbox" name="changes" id = "status" value="1"> Changes Required
+					<input type="checkbox" name="status[]" id = "status" value=0> New/Pending
 				</label>
 
-				<label>                       
-					<input type="checkbox" name="accept" id = "status" value="2"> Accepted
-				</label>
-				
 				<label>
-					<input type="checkbox" name="reject" id = "status" value="3"> Rejected
+					<input type="checkbox" name="status[]" id = "status" value=1> Changes Required
+				</label>
+
+				<label>
+					<input type="checkbox" name="status[]" id = "status" value=2> Accepted
+				</label>
+
+				<label>
+					<input type="checkbox" name="status[]" id = "status" value=3> Rejected
 				</label>
 			</div>
-			
-			{!! Form::select('searchlist', array(
-			'choose'=>'Select search criteria',
-			'rid'=>'Request id', 					
-			'id'=>'Member id',
-			'title'=>'Title',
-			'orgname'=> 'Organisation name' ,
-			'name'=>'Applicant name'
-			)
-			)!!}
-			
-			<input type="text" class="form-control" name="search" id="search_text" placeholder="Enter text">
+
+			{!! Form::select('searchlist', $cat_select_options,$search) !!}
+
+			<input type="text" class="form-control" name="search" id="search_text" value="{{$search_text}}" placeholder="Enter text">
 
 			<!--<div class="form-group">-->
 			<!-- <label for="start_date">Start Date</label>-->
-			{!! Form::text('start_date', null, ['class'=>'form-control', 'id'=>'start_date' ,'placeholder'=>'Select Start Date'])!!}
+			{!! Form::text('start_date', $fromDate, ['class'=>'form-control', 'id'=>'start_date' ,'placeholder'=>'Select Start Date'])!!}
 			
 
 			
 			<!--<label for="end_date">End Date</label>-->
-			{!! Form::text('end_date', null, ['class'=>'form-control', 'id'=>'end_date' ,'placeholder'=>'Select End Date'])!!}
+			{!! Form::text('end_date', $toDate, ['class'=>'form-control', 'id'=>'end_date' ,'placeholder'=>'Select End Date'])!!}
 			
 			<button type="submit" class="btn btn-warning pull-right btn-sm"><span class="glyphicon glyphicon-search" area-hidden="true"></span> SEARCH</button>
 			<!-- </div>-->

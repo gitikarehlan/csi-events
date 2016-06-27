@@ -126,7 +126,7 @@ Route::get('/viewfile/{id?}',['middleware'=>'auth','uses'=>'ResearchGrantControl
 Route::post('/user_comments/{id?}/{v_num?}',['middleware'=>'auth','uses'=>'ResearchGrantController@comments'])->name('user_comments');	
 
 Route::group(['prefix'=> 'admin' ], function(){
-	Route::get('/admin_grants', ['middleware'=>'auth.admin','uses'=>'adminResearchGrantController@allgrants']);	
+	Route::get('/admin_grants', ['as' => 'adminResearchGrantView','middleware'=>'auth.admin','uses'=>'adminResearchGrantController@allgrants']);	
 
 	Route::get('/admin_version1/{v?}', ['middleware'=>'auth.admin', 'as' => 'commentsAndStatus',  'uses'=>'adminResearchGrantController@commentsandstatus']);	
 	Route::post('/admin_version/{id?}', ['middleware'=>'auth.admin', 'as' => 'makechanges', 'uses'=>'adminResearchGrantController@makechanges']);	

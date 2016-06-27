@@ -24,6 +24,7 @@ class ResearchGrantController extends Controller
   {
    $users = Auth::user()->user();
    $arr = Proposals::myQuery($users);
+   
    return view('frontend.researchgrant.allresearchgrants',compact('users','arr'));
  } 
 
