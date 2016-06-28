@@ -6,3 +6,4 @@ Homestead.json
 /storage/logs/laravel.log
 /storage/uploads/grant_proposals/*.pdf
 /storage/uploads/payment_proofs/*.pdf
+.idea/
