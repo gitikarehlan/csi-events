@@ -5,6 +5,8 @@ use DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\PaginationServiceProvider;
 use App\proposal_version;
+use App\Proposal;
+
 class Proposals extends Model
 {
     protected $fillable = ['status',
@@ -39,13 +41,21 @@ class Proposals extends Model
 
      public static function myQuery($users)
      {
-	       $arr = \App\Proposal::join('proposal_versions','proposals.id','=', 'proposal_versions.proposal_id')->where('proposals.user_id','=',$users->id)->whereNull('deleted_at')->orderby('proposals.id','DESC')->paginate(5);
+	       $arr = Proposal::join('proposal_versions','proposals.id','=', 'proposal_versions.proposal_id')->where('proposals.user_id','=',$users->id)->whereNull('deleted_at')->orderby('proposals.id','DESC')->paginate(5);
         return $arr;
     }
 
     public static function scopeFilterByProposalId($query,$p_id)
     {
         return $query->where('id','=','$p_id');
+    }
+
+    public static function getGrantVersion($prop_id)
+    {
+        $arr= Proposal::join('proposal_versions','proposals.id','=', 'proposal_versions.proposal_id')
+                        ->where('proposal_versions.proposal_id','=',$prop_id) 
+                        ->whereNull('proposal_versions.deleted_at')->orderby('proposals.id','DESC')->get();
+        return $arr;
     }
 
    
