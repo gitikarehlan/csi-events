@@ -80,7 +80,7 @@
   @endforelse
 
   {!! Form::Close() !!}
-  @endforeach
+ 
 </div>
 </section>
 @endsection
