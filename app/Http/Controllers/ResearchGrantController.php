@@ -90,7 +90,7 @@ else
 public function viewfile($id)
 {
   $filename = $id;
-  $path = storage_path().'/uploads/grant_proposals/'.$filename;
+  $path = storage_path('/uploads/grant_proposals/'.$filename);
   $response=Response::make(file_get_contents($path), 200, [
     'Content-Type' => 'application/pdf',
     'Content-Disposition' => 'inline; '.$filename,
