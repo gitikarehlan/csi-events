@@ -115,19 +115,35 @@
 
 				Status:
 				<label>
-					<input type="checkbox" name="status[]" id = "status" value=0> New/Pending
+					@if(in_array(0,$status))
+					<input type="checkbox" name="status[]" id = "status" value=0 checked> New/Pending
+						@else
+						<input type="checkbox" name="status[]" id = "status" value=0> New/Pending
+						@endif
 				</label>
 
 				<label>
-					<input type="checkbox" name="status[]" id = "status" value=1> Changes Required
+					@if(in_array(1,$status))
+					<input type="checkbox" name="status[]" id = "status" value=1 checked> Changes Required
+						@else
+						<input type="checkbox" name="status[]" id = "status" value=1> Changes Required
+						@endif
 				</label>
 
 				<label>
-					<input type="checkbox" name="status[]" id = "status" value=2> Accepted
+					@if(in_array(2,$status))
+					<input type="checkbox" name="status[]" id = "status" value=2 checked> Accepted
+						@else
+						<input type="checkbox" name="status[]" id = "status" value=2> Accepted
+						@endif
 				</label>
 
 				<label>
-					<input type="checkbox" name="status[]" id = "status" value=3> Rejected
+					@if(in_array(3,$status))
+					<input type="checkbox" name="status[]" id = "status" value=3 checked> Rejected
+						@else
+						<input type="checkbox" name="status[]" id = "status" value=3> Rejected
+						@endif
 				</label>
 			</div>
 

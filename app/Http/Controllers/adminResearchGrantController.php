@@ -41,7 +41,7 @@ class adminResearchGrantController extends Controller
     $page = (Input::exists('page'))? abs(Input::get('page')): 1;
     $search=(Input::exists('searchlist'))?abs(Input::get('searchlist')):'' ;
     $search_text=(Input::exists('search'))?(Input::get('search')):'';
-    $status=Input::get('status');
+    $status=(Input::exists('status'))?(Input::get('status')):array();
     $fromDate=(Input::exists('date1'))?(Input::get('date1')):'';
     $toDate=(Input::exists('date2'))?(Input::get('date2')):'';
 
@@ -127,7 +127,7 @@ class adminResearchGrantController extends Controller
         $user->forget($to_date_records);
       }
     }
-    return view('backend.researchgrant.allproposals_admin',compact('user','cat_select_options','search','search_text','fromDate','toDate'));
+    return view('backend.researchgrant.allproposals_admin',compact('user','cat_select_options','status','search','search_text','fromDate','toDate'));
   }
 
   public function admin_showversions($p_id)
