@@ -74,24 +74,25 @@ class adminResearchGrantController extends Controller
           if(count($status))  {
             $member_id=Institution::select('member_id')->where('name','like','%'.$search_text.'%')->get();
             $pid=proposal_version::whereIn('research_status',$status)->lists('proposal_id');
-            $user=Proposals::whereIn('user_id','=',$member_id)->whereIn('id',$pid)->paginate($rows);
+            $user=Proposals::whereIn('user_id',$member_id)->whereIn('id',$pid)->paginate($rows);
           }  else  {
             $member_id=Institution::select('member_id')->where('name','like','%'.$search_text.'%')->get();
 
-            $user=Proposals::whereIn('user_id','=',$member_id)->paginate($rows);
+            $user=Proposals::whereIn('user_id',$member_id)->paginate($rows);
           }
           break;
         case 5:
           if(count($status)){
             $member_id=Individual::select('member_id')->where('first_name','like','%'.$search_text.'%')->get();
             $pid=proposal_version::whereIn('research_status',$status)->lists('proposal_id');
-            $user=Proposals::whereIn('user_id','=',$member_id)->whereIn('id',$pid)->paginate($rows);
+            $user=Proposals::whereIn('user_id',$member_id)->whereIn('id',$pid)->paginate($rows);
           }else{
             $member_id=Individual::select('member_id')->where('first_name','like','%'.$search_text.'%')->get();
 
-            $user=Proposals::whereIn('user_id','=',$member_id)->paginate($rows);
+            $user=Proposals::whereIn('user_id',$member_id)->paginate($rows);
           }
           break;
+
       }
 
     }else {
